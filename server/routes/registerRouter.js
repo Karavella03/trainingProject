@@ -1,11 +1,12 @@
 const experess = require('express')
 const bcrypt = require('bcryptjs')
 const router = experess.Router()
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 const User = require('../models/User')
 const errorHandler = require('../utils/errorHandler')
 
 router.post('/register', async (req, res) => {
-    console.log(req.body)
     const login = req.body.login.toLowerCase()
     const conditate = await User.findOne({ login })
     if (conditate) {
@@ -23,7 +24,15 @@ router.post('/register', async (req, res) => {
         })
         try {
             await user.save()
-            res.status(200).json(user)
+            const token = jwt.sign({
+                login: user.login,
+                userId: user._id
+            }, config.jwt, {
+                expiresIn: '6h'
+            })
+            res.status(200).json({
+                token
+            })
         } catch (err) {
             errorHandler(err, res)
         }
