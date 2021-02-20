@@ -19,10 +19,17 @@ const userScheme = new Schema({
         type: String,
         required: true
     },
-    about: {
+    description: {
         type: String
     },
-    
+    groups: [{
+        ref: 'groups',
+        type: Schema.Types.ObjectId
+    }],
+    records: [{
+        ref: 'records',
+        type: Schema.Types.ObjectId
+    }]
 })
 
 module.exports = mongoose.model('User', userScheme)
