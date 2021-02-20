@@ -2,22 +2,22 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const userScheme = new Schema({
-    logn: {
+    login: {
         type: String,
-        required: true,
+        required: 'Введите логин',
         unique: true
     },
     passwordHash: {
         type: String,
-        required: true
+        required: 'Введите пароль'
     },
     name: {
         type: String,
-        required: true
+        required: 'Укажите имя'
     },
     surname: {
         type: String,
-        required: true
+        required: 'Укажите фамилию'
     },
     description: {
         type: String
