@@ -14,7 +14,7 @@ router.use('/api', jsonParser)
 
 router.use('/api', registerRouter)
 router.use('/api', loginRouter)
-router.user('api', authorization, userRouter)
+router.use('/api', authorization, userRouter)
 router.get('/api/test', authorization, (req, res) => {
     res.status(200).json(req.user)
 })

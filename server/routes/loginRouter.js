@@ -7,7 +7,6 @@ const config = require('../config/config')
 const errorHandler = require('../utils/errorHandler')
 
 router.post('/login', async (req, res) => {
-    console.log(req.body)
     const login = req.body.login.toLowerCase()
     const user = await User.findOne({ login })
     if (!user) {
