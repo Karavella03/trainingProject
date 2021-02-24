@@ -5,7 +5,7 @@ const Group = require('../models/Group')
 const Record = require('../models/Record')
 const errorHandler = require('../utils/errorHandler')
 
-//create group
+//Создание группы
 router.put('/group', async (req, res) => {
     if (!req.body.name) {
         errorHandler(new Error('Укажите название группы'), res)
@@ -21,7 +21,7 @@ router.put('/group', async (req, res) => {
     res.status(200).json(group)
 })
 
-//get group by id
+//Получение гуппы по id
 router.get('/group/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)
@@ -34,7 +34,7 @@ router.get('/group/:id', async (req, res) => {
     }
 })
 
-//update group
+//Изменение группы по id
 router.post('/group/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)
@@ -51,7 +51,7 @@ router.post('/group/:id', async (req, res) => {
     }
 })
 
-//delete group
+//Удаление группы по id
 router.delete('/group/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)

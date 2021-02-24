@@ -5,7 +5,7 @@ const Group = require('../models/Group')
 const Record = require('../models/Record')
 const errorHandler = require('../utils/errorHandler')
 
-//get user by id
+//Получение пользователя по id
 router.get('/user/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id пользователя'), res)
@@ -18,7 +18,7 @@ router.get('/user/:id', async (req, res) => {
     }
 })
 
-//update user
+//Обновление пользователя по id
 router.post('/user/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id пользователя'), res)
@@ -35,7 +35,7 @@ router.post('/user/:id', async (req, res) => {
     }
 })
 
-//delete user
+//удаление пользователя по id
 router.delete('/user/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id пользователя'), res)

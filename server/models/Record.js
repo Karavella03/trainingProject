@@ -1,6 +1,11 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
+/*
+Модель записи, запись состоит из описания, 
+списка авторов,
+группы, в которую запись была опубоикована 
+*/
 const recordScheme = new Schema({
     description: {
         type: String

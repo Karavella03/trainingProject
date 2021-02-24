@@ -6,6 +6,12 @@ const config = require('../config/config')
 const User = require('../models/User')
 const errorHandler = require('../utils/errorHandler')
 
+/*
+Регистрация пользователя
+Проверка логина на уникальность, создание пользователя по его модели,
+запись пользователя в базу данных,
+выдача токена пользователю
+*/
 router.post('/register', async (req, res) => {
     const login = req.body.login.toLowerCase()
     const conditate = await User.findOne({ login })

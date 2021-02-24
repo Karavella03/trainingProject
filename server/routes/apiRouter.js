@@ -13,6 +13,9 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use('/api', urlencodedParser)
 router.use('/api', jsonParser)
 
+/*
+Обработка запросов, начинающикся с /api/*
+*/
 router.use('/api', registerRouter)
 router.use('/api', loginRouter)
 router.use('/api', authorization, userRouter)

@@ -1,6 +1,12 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
+/* 
+Модель группы, группа состоиз из
+названия, описания, списка участников,
+списка записей опубликованных в этой группе,
+списка пользователей с особыми правами в группе
+*/
 const groupScheme = new Schema({
     name: {
         type: String,

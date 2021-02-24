@@ -6,6 +6,11 @@ const User = require('../models/User')
 const config = require('../config/config')
 const errorHandler = require('../utils/errorHandler')
 
+/*
+Поиск пользователя в базе данных по логину,
+проверка правильности ввода пароля,
+выдача токена пользователю
+*/
 router.post('/login', async (req, res) => {
     const login = req.body.login.toLowerCase()
     const user = await User.findOne({ login })
