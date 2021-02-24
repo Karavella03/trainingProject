@@ -17,7 +17,7 @@ form.onsubmit = async (e) => {
         localStorage.setItem('token', result.token)
         location.href = '/'
     } else {
-        alert(result.message)
+        alert(result.errorMessage)
         form.reset()
     }
     return false

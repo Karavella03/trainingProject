@@ -21,7 +21,7 @@ router.put('/group', async (req, res) => {
     res.status(200).json(group)
 })
 
-//Получение гуппы по id
+//Получение группы по id
 router.get('/group/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)

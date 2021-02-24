@@ -5,27 +5,36 @@ const Group = require('../../models/Group')
 const Record = require('../../models/Record')
 const errorHandler = require('../../utils/errorHandler')
 
-//Получение пользователя по id
-router.get('/user/:id', async (req, res) => {
-    if (!req.params.id) {
-        errorHandler(new Error('Неверный id пользователя'), res)
-    }
+//Получение пользователя
+router.get('/user', async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.params.id })
+        const user = await User.findOne({ _id: req.user.id })
+        user.isOwner = true
         res.status(200).json(user)
     } catch (err) {
         errorHandler(err, res)
     }
 })
 
-//Обновление пользователя по id
-router.post('/user/:id', async (req, res) => {
+//Получение пользователя по id
+router.get('/user/:id', async (req, res) => {
     if (!req.params.id) {
-        errorHandler(new Error('Неверный id пользователя'), res)
+        errorHandler(new Error('Неверный id пользователя'), res, 404)
     }
     try {
+        const user = await User.findOne({ _id: req.params.id })
+        user.isOwner = req.user.id === req.params.id
+        res.status(200).json(user)
+    } catch (err) {
+        errorHandler(err, res)
+    }
+})
+
+//Обновление пользователя
+router.post('/user', async (req, res) => {
+    try {
         const user = await User.findOneAndUpdate(
-            { _id: req.params.id },
+            { _id: req.user.id },
             { $set: req.body },
             { new: true }
         )
@@ -36,19 +45,16 @@ router.post('/user/:id', async (req, res) => {
 })
 
 //удаление пользователя по id
-router.delete('/user/:id', async (req, res) => {
-    if (!req.params.id) {
-        errorHandler(new Error('Неверный id пользователя'), res)
-    }
+router.delete('/user', async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.params.id })
+        const user = await User.findOne({ _id: req.user.id })
         user.groups.forEach(async groupId => {
             await Group.updateOne({ _id: groupId },
-                { $pull: { 'users': req.params.id } })
+                { $pull: { 'users': req.user.id } })
         });
         user.records.forEach(async recordId => {
             await Record.updateOne({ _id: recordId },
-                { $pull: { 'users': req.params.id } })
+                { $pull: { 'users': req.user.id } })
         });
         await User.remove({ _id: req.params.id })
         res.status(200).json({ message: 'User was deleted' })
