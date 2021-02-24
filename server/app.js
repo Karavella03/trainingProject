@@ -11,6 +11,9 @@ mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: t
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
 
+//Подключение шаблонизатора
+app.set('view engine', 'hbs')
+app.set('views', '/client/views')
 
 app.use(require('cors')())
 app.use(express.static('src'))
