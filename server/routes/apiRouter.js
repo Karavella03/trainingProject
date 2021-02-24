@@ -8,10 +8,10 @@ const userRouter = require('./api/userRouter')
 const groupRouter = require('./api/groupRouter')
 
 const jsonParser = express.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
-router.use('/api', urlencodedParser)
 router.use('/api', jsonParser)
+router.use('/api', urlencodedParser)
 
 /*
 Обработка запросов, начинающикся с /api/*

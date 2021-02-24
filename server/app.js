@@ -5,20 +5,23 @@ const mongoose = require('mongoose')
 const config = require('./config/config')
 const errorHandler = require('./utils/errorHandler')
 const apiRouter = require('./routes/apiRouter')
+const clientRouter = require('./routes/clientRouter')
 
 //Подключение к базе данных
 mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
 
-//Подключение шаблонизатора
-app.set('view engine', 'hbs')
-app.set('views', '/client/views')
-
 app.use(require('cors')())
 app.use(express.static('src'))
 
+//Подключение шаблонизатора
+app.set('view engine', 'hbs')
+app.set('views', './client/views')
+
+
 app.use(apiRouter)
+app.use(clientRouter)
 
 app.use((err, req, res, next) => {
     errorHandler(err, res, 500)
