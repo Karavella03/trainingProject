@@ -2,9 +2,9 @@ const experess = require('express')
 const bcrypt = require('bcryptjs')
 const router = experess.Router()
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
-const User = require('../models/User')
-const errorHandler = require('../utils/errorHandler')
+const config = require('../../config/config')
+const User = require('../../models/User')
+const errorHandler = require('../../utils/errorHandler')
 
 /*
 Регистрация пользователя

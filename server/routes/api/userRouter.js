@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/User')
-const Group = require('../models/Group')
-const Record = require('../models/Record')
-const errorHandler = require('../utils/errorHandler')
+const User = require('../../models/User')
+const Group = require('../../models/Group')
+const Record = require('../../models/Record')
+const errorHandler = require('../../utils/errorHandler')
 
 //Получение пользователя по id
 router.get('/user/:id', async (req, res) => {

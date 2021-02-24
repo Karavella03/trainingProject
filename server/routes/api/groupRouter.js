@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/User')
-const Group = require('../models/Group')
-const Record = require('../models/Record')
-const errorHandler = require('../utils/errorHandler')
+const User = require('../../models/User')
+const Group = require('../../models/Group')
+const Record = require('../../models/Record')
+const errorHandler = require('../../utils/errorHandler')
 
 //Создание группы
 router.put('/group', async (req, res) => {

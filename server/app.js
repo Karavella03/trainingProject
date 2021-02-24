@@ -6,6 +6,7 @@ const config = require('./config/config')
 const errorHandler = require('./utils/errorHandler')
 const apiRouter = require('./routes/apiRouter')
 
+//Подключение к базе данных
 mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err))
