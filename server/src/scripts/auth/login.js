@@ -13,7 +13,7 @@ form.onsubmit = async (e) => {
         })
     })
     const result = await responce.json()
-    if(responce.status === 200) {
+    if(responce.ok) {
         localStorage.setItem('token', result.token)
         location.href = '/'
     } else {

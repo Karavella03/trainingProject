@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../../models/User')
 const config = require('../../config/config')
 const errorHandler = require('../../utils/errorHandler')
+const generateToken = require('../../utils/generateToken')
 
 /*
 Поиск пользователя в базе данных по логину,
@@ -20,12 +21,7 @@ router.post('/login', async (req, res) => {
         const password = req.body.password
         const passwordResult = await bcrypt.compare(password, user.passwordHash)
         if (passwordResult) {
-            const token = jwt.sign({
-                login: user.login,
-                userId: user._id
-            }, config.jwt, {
-                expiresIn: '6h'
-            })
+            const token = await generateToken(user)
             res.status(200).json({
                 token
             })

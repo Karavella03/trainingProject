@@ -30,12 +30,7 @@ router.post('/register', async (req, res) => {
         })
         try {
             await user.save()
-            const token = jwt.sign({
-                login: user.login,
-                userId: user._id
-            }, config.jwt, {
-                expiresIn: '6h'
-            })
+            const token = await generateToken(user)
             res.status(200).json({
                 token
             })

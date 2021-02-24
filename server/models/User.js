@@ -17,6 +17,9 @@ const userScheme = new Schema({
         type: String,
         required: 'Введите пароль'
     },
+    authNumber: {
+        type: String,
+    },
     name: {
         type: String,
         required: 'Укажите имя'

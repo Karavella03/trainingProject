@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
                 }
                 else if (payload) {
                     const user = await User.findOne({ _id: payload.userId })
-                    if (!user) {
+                    if (!user || payload.authNumber !== user.authNumber) {
                         errorHandler(new Error('Ошибка авторизации'), res, 401)
                     }
                     req.user = user
