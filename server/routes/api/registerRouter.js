@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../../config/config')
 const User = require('../../models/User')
 const errorHandler = require('../../utils/errorHandler')
+const generateToken = require('../../utils/generateToken')
 
 /*
 Регистрация пользователя
