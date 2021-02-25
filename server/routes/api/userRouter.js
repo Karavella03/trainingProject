@@ -44,7 +44,7 @@ router.post('/user', async (req, res) => {
     }
 })
 
-//удаление пользователя по id
+//удаление пользователя
 router.delete('/user', async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user.id })
