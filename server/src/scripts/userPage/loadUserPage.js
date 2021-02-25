@@ -5,7 +5,7 @@ import { userDescription } from './elements/userDescription.js'
 (async () => {
     const id = new URL(location).searchParams.get('id')
     const user = await getUser(id)
-    document.querySelector('#groups').insertAdjacentElement('afterend', groupsList(user))
+    document.querySelector('#groups-p').insertAdjacentElement('afterend', groupsList(user))
     document.querySelector('#user-container').insertAdjacentElement('beforeend', userDescription(user))
 })()
 
