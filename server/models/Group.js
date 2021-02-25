@@ -3,9 +3,8 @@ const Schema = mongoose.Schema
 
 /* 
 Модель группы, группа состоиз из
-названия, описания, списка участников,
-списка записей опубликованных в этой группе,
-списка пользователей с особыми правами в группе
+названия, описания, списка подписчиков, списка участников,
+списка записей опубликованных в этой группе
 */
 const groupScheme = new Schema({
     name: {
@@ -15,7 +14,11 @@ const groupScheme = new Schema({
     description: {
         type: String
     },
-    users: [{
+    subscribers: [{
+        ref: 'users',
+        type: Schema.Types.ObjectId
+    }],
+    members: [{
         ref: 'users',
         type: Schema.Types.ObjectId
     }],

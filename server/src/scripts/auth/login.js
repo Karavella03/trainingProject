@@ -15,7 +15,7 @@ form.onsubmit = async (e) => {
     const result = await responce.json()
     if(responce.ok) {
         localStorage.setItem('token', result.token)
-        location.href = '/'
+        location.href = '/user'
     } else {
         alert(result.errorMessage)
         form.reset()

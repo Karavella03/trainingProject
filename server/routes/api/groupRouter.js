@@ -13,7 +13,8 @@ router.put('/group', async (req, res) => {
     const group = new Group({
         name: req.body.name,
         description: req.body.description,
-        users: [req.user],
+        subscribers: [req.user],
+        members: [req.user],
     })
     await group.save()
     req.user.groups.push(group)
@@ -40,9 +41,46 @@ router.post('/group/:id', async (req, res) => {
         errorHandler(new Error('Неверный id группы'), res)
     }
     try {
+        const group = await Group.findOne({ _id: req.params.id })
+        if (!group.members.includes(req.user._id)) {
+            errorHandler(new Error('Отказано в доступе'), res, 403)
+        }
+        for(key in group){ 
+            group[key] = req.body[key] ?? group[key]
+        }
+        await group.save()
+        res.status(200).json(group)
+    } catch (err) {
+        errorHandler(err, res)
+    }
+})
+
+//подписка на группу
+router.post('/group/subscribe/:id', async (req, res) => {
+    if (!req.params.id) {
+        errorHandler(new Error('Неверный id группы'), res)
+    }
+    try {
         const group = await Group.findOneAndUpdate(
             { _id: req.params.id },
-            { $set: req.body },
+            { $push: { 'subscribers': req.user } },
+            { new: true }
+        )
+        res.status(200).json(group)
+    } catch (err) {
+        errorHandler(err, res)
+    }
+})
+
+//отписка от группы
+router.post('/group/unsubscribe/:id', async (req, res) => {
+    if (!req.params.id) {
+        errorHandler(new Error('Неверный id группы'), res)
+    }
+    try {
+        const group = await Group.findOneAndUpdate(
+            { _id: req.params.id },
+            { $pull: { 'subscribers': req.user } },
             { new: true }
         )
         res.status(200).json(group)
@@ -58,6 +96,9 @@ router.delete('/group/:id', async (req, res) => {
     }
     try {
         const group = await Group.findOne({ _id: req.params.id })
+        if (!group.members.includes(req.user._id)) {
+            errorHandler(new Error('Отказано в доступе'), res, 403)
+        }
         group.users.forEach(async userId => {
             await User.updateOne({ _id: userId },
                 { $pull: { 'groups': req.params.id } })

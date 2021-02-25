@@ -50,7 +50,10 @@ router.delete('/user', async (req, res) => {
         const user = await User.findOne({ _id: req.user.id })
         user.groups.forEach(async groupId => {
             await Group.updateOne({ _id: groupId },
-                { $pull: { 'users': req.user.id } })
+                {
+                    $pull: { 'subscribers': req.user.id },
+                    $pull: { 'members': req.user.id }
+                })
         });
         user.records.forEach(async recordId => {
             await Record.updateOne({ _id: recordId },

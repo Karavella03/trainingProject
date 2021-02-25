@@ -12,7 +12,7 @@ router.get('/register', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-    res.send('<h1>Main</h1>')
+    res.send('<h1>Later...</h1>')
 })
 
 //Страница пользователя
