@@ -21,12 +21,15 @@ router.get('/user/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id пользователя'), res, 404)
     }
+    let user
     try {
-        const user = await User.findOne({ _id: req.params.id })
+        user = await User.findOne({ _id: req.params.id })
+    } catch (err) {
+        errorHandler(err, res, 404)
+    }
+    if (user) {
         user.isOwner = req.user.id === req.params.id
         res.status(200).json(user)
-    } catch (err) {
-        errorHandler(err, res)
     }
 })
 

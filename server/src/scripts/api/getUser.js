@@ -4,11 +4,12 @@ export const getUser = async (id) => {
     const responce = await fetch(`/api/user${id ? '/' + id : ''}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${localStorage.token}` 
+            'Authorization': `Bearer ${localStorage.token}`
         }
     })
     const result = await responce.json()
-    if(responce.status === 401){
+    console.log(responce)
+    if (responce.status === 401) {
         location.href = '/login'
     }
     return result

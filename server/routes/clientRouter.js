@@ -3,12 +3,12 @@ const router = express.Router()
 
 //Страница входа
 router.get('/login', (req, res) => {
-    res.render('login.hbs')
+    res.render('auth/login.hbs')
 })
 
 //Страница регистрации
 router.get('/register', (req, res) => {
-    res.render('register.hbs')
+    res.render('auth/register.hbs')
 })
 
 router.get('/', (req, res) => {
@@ -17,7 +17,12 @@ router.get('/', (req, res) => {
 
 //Страница пользователя
 router.get('/user', async (req, res) => {
-    res.render('user.hbs')
+    res.render('user/userPage.hbs')
+})
+
+//Страница настроек пользователя
+router.get('/user/settings', async (req, res) => {
+    res.render('user/userSettings.hbs')
 })
 
 module.exports = router
