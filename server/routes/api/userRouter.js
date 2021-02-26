@@ -9,8 +9,9 @@ const errorHandler = require('../../utils/errorHandler')
 router.get('/user', async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user.id })
-        user.isOwner = true
-        res.status(200).json(user)
+        userObject = user.toObject()
+        userObject.isOwner = true
+        res.status(200).json(userObject)
     } catch (err) {
         errorHandler(err, res)
     }

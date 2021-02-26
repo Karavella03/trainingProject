@@ -7,7 +7,7 @@ function drawGroups(user) {
     if (user.groups.length === 0) {
         const p = document.createElement('p')
         p.textContent = user.isOwner ? 'Вы не состоите ни в одной группе' : 'Пользователь не состоит ни в одной группе'
-        groupsUl.insertAdjacentElement('afterend', p)
+        groupsUl.insertAdjacentElement('beforeend', p)
     }
     user.groups.forEach(groupId => {
         drawGroup(groupId)
