@@ -8,7 +8,6 @@ export const getUser = async (id) => {
         }
     })
     const result = await responce.json()
-    console.log(responce)
     if (responce.status === 401) {
         location.href = '/login'
     }

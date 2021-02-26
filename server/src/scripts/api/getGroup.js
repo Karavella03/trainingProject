@@ -1,4 +1,4 @@
-//Получение объекта группы с полями name, description, users, records
+//Получение объекта группы с полями name, description, subscribers, members, records
 export const getGroup = async (id) => {
     const responce = await fetch(`/api/group/${id}`, {
         method: 'GET',
