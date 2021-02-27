@@ -4,6 +4,8 @@ const User = require('../../models/User')
 const Group = require('../../models/Group')
 const Record = require('../../models/Record')
 const errorHandler = require('../../utils/errorHandler')
+const generatePasswordHash = require('../../utils/generatePasswordHash')
+const checkPassword = require('../../utils/checkPassword')
 
 //Получение пользователя
 router.get('/user', async (req, res) => {
@@ -31,6 +33,26 @@ router.get('/user/:id', async (req, res) => {
     if (user) {
         user.isOwner = req.user.id === req.params.id
         res.status(200).json(user)
+    }
+})
+
+//Смена пароля пользователя
+router.post('/user/changepassword', async (req, res) => {
+    const passwordResult = await checkPassword(req.user.passwordHash, req.body.password)
+    if (passwordResult) {
+        try {
+            const passwordHash = await generatePasswordHash(req.body.newPassword)
+            const user = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                { $set: { passwordHash } },
+                { new: true }
+            )
+            res.status(200).json(user)
+        } catch (err) {
+            errorHandler(err, res)
+        }
+    } else {
+        errorHandler(new Error('Введён неверный старый пароль'), res, 403)
     }
 })
 

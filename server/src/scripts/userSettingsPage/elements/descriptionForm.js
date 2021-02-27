@@ -1,3 +1,4 @@
+const message = document.querySelector('#message-pharagraph')
 const form = document.createElement('form')
 form.classList = 'mb-3'
 const elements = {

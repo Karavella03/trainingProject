@@ -1,11 +1,11 @@
 const experess = require('express')
-const bcrypt = require('bcryptjs')
 const router = experess.Router()
 const jwt = require('jsonwebtoken')
 const config = require('../../config/config')
 const User = require('../../models/User')
 const errorHandler = require('../../utils/errorHandler')
 const generateToken = require('../../utils/generateToken')
+const generatePasswordHash = require('../../utils/generatePasswordHash')
 
 /*
 Регистрация пользователя
@@ -19,9 +19,8 @@ router.post('/register', async (req, res) => {
     if (conditate) {
         errorHandler(new Error('Пользователь уже существует'), res, 409)
     } else {
-        const salt = await bcrypt.genSalt(10)
         const password = req.body.password
-        const passwordHash = await bcrypt.hash(password, salt)
+        const passwordHash = await generatePasswordHash(password)
         const user = new User({
             login,
             passwordHash,
