@@ -1,3 +1,5 @@
+import { changePassword } from '../../api/changePassword.js'
+
 const form = document.createElement('form')
 form.classList = 'mb-3'
 const message = document.querySelector('#message-pharagraph')
@@ -32,9 +34,8 @@ export const changePasswordForm = (user) => {
 form.onsubmit = async (e) => {
     e.preventDefault()
     if(elements.newPasswordOne.value === elements.newPasswordTwo.value) {
-        const responce = await sendForm()
-        const result = await responce.json()
-        if(!responce.ok) {
+        const result = await changePassword(elements.password.value, elements.newPasswordOne.value)
+        if(result.errorMessage) {
             message.textContent = result.errorMessage
         } else {
             message.textContent = 'Пароль успешно изменён'
@@ -44,18 +45,4 @@ form.onsubmit = async (e) => {
         message.textContent= 'Пароли не совпадают'
     }
     return false
-}
-
-async function sendForm() {
-    return await fetch('/api/user/changepassword', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${localStorage.token}`
-        },
-        body: JSON.stringify({
-            password: elements.password.value,
-            newPassword: elements.newPasswordOne.value
-        })
-    })
 }
