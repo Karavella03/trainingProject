@@ -1,5 +1,5 @@
 const form = document.forms.formSignup
-
+//Регистрация и сохраннение в localStorage токена авторизации при успешной регистрации
 form.onsubmit = async (e) => {
     e.preventDefault()
     const responce = await fetch('/api/register', {

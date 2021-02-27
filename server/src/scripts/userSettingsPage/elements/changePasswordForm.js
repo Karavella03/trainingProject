@@ -8,7 +8,7 @@ const elements = {
     newPasswordTwo: document.createElement('input'),
     submit: document.createElement('button')
 }
-
+//Создание элементов формы смены пароля: Текущий пароль, два раза новый пароль
 export const changePasswordForm = (user) => {
     for (let key in elements) {
         if (key !== 'submit') {
@@ -28,6 +28,7 @@ export const changePasswordForm = (user) => {
     return form
 }
 
+//Отправка закпроса на смену пароля, если новый пароль введён два раза одинаково
 form.onsubmit = async (e) => {
     e.preventDefault()
     if(elements.newPasswordOne.value === elements.newPasswordTwo.value) {

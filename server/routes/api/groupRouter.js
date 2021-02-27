@@ -35,7 +35,7 @@ router.get('/group/:id', async (req, res) => {
     }
 })
 
-//Изменение группы по id
+//Изменение группы по id, редактировать группу могут только её участники. Подписчики и остальные пользователи не могут.
 router.post('/group/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)
