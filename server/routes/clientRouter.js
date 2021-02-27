@@ -25,4 +25,9 @@ router.get('/user/settings', async (req, res) => {
     res.render('user/userSettings.hbs')
 })
 
+//Выход из аккаунта
+router.get('/logout', async (req, res) => {
+    res.render('auth/logout.hbs')
+})
+
 module.exports = router
