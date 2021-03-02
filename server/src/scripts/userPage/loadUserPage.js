@@ -1,4 +1,4 @@
-import { getUser } from '../api/getUser.js'
+import { getUser } from '../api/user/getUser.js'
 import { groupsList } from './elements/groupsList.js'
 import { userDescription } from './elements/userDescription.js'
 

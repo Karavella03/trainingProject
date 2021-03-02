@@ -1,4 +1,4 @@
-import { getUser } from '../../api/getUser.js'
+import { getUser } from '../../api/user/getUser.js'
 
 const membersUl = document.createElement('ul')
 membersUl.classList = 'list-unstyled ms-3 h5'

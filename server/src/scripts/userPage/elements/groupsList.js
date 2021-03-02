@@ -1,4 +1,4 @@
-import { getGroup } from '../../api/getGroup.js'
+import { getGroup } from '../../api/group/getGroup.js'
 
 const groupsUl = document.createElement('ul')
 groupsUl.classList = 'list-unstyled ms-3 h5'

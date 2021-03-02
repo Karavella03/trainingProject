@@ -1,4 +1,4 @@
-import { getUser } from '../api/getUser.js'
+import { getUser } from '../api/user/getUser.js'
 import { userSettings } from './elements/userSettings.js'
 
 (async () => {

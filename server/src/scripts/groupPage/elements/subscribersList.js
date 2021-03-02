@@ -1,4 +1,4 @@
-import { getUser } from '../../api/getUser.js'
+import { getUser } from '../../api/user/getUser.js'
 import { subscribeButton } from './subscribeButton.js'
 
 let counter = 0

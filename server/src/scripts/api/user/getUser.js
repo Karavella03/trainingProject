@@ -7,9 +7,11 @@ export const getUser = async (id) => {
             'Authorization': `Bearer ${localStorage.token}`
         }
     })
-    const result = await responce.json()
-    if (responce.status === 401) {
+    if (responce.status === 404) {
+        location.href = '/user'
+    } else if (responce.status === 401) {
         location.href = '/login'
     }
+    const result = await responce.json()
     return result
 }

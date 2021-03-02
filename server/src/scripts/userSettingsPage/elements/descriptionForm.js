@@ -1,4 +1,4 @@
-import { changeUserDescription } from '../../api/changeUserDescription.js'
+import { changeUserDescription } from '../../api/user/changeUserDescription.js'
 
 const message = document.querySelector('#message-pharagraph')
 const form = document.createElement('form')

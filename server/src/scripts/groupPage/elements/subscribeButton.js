@@ -1,5 +1,5 @@
 import { subscribe } from '../../api/group/subscribe.js'
-import { getUser } from '../../api/getUser.js'
+import { getUser } from '../../api/user/getUser.js'
 import { subscribersList } from './subscribersList.js'
 
 export const subscribeButton = (group, user) => {

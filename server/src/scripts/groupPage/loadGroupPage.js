@@ -1,5 +1,5 @@
-import { getGroup } from '../api/getGroup.js'
-import { getUser } from '../api/getUser.js'
+import { getGroup } from '../api/group/getGroup.js'
+import { getUser } from '../api/user/getUser.js'
 import { subscribersList } from './elements/subscribersList.js'
 import { membersList } from './elements/membersList.js'
 import { groupDescription } from './elements/groupDescription.js'

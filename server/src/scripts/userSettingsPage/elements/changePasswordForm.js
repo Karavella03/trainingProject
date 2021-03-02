@@ -1,4 +1,4 @@
-import { changePassword } from '../../api/changePassword.js'
+import { changePassword } from '../../api/user/changePassword.js'
 
 const form = document.createElement('form')
 form.classList = 'mb-3'

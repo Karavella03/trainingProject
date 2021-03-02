@@ -1,6 +1,6 @@
 const conteiner = document.createElement('div')
 conteiner.classList = 'container= ms-5'
-conteiner.style = 'max-width: 50%;'
+conteiner.style = 'width: 50%;'
 conteiner.id = 'user-description'
 
 const fullNamePharagraph = document.createElement('p')
