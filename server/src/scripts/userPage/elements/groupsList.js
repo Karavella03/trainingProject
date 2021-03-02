@@ -4,11 +4,13 @@ const groupsUl = document.createElement('ul')
 groupsUl.classList = 'list-unstyled ms-3 h5'
 
 function drawGroups(user) {
+    const p = document.createElement('p')
     if (user.groups.length === 0) {
-        const p = document.createElement('p')
         p.textContent = user.isOwner ? 'Вы не состоите ни в одной группе' : 'Пользователь не состоит ни в одной группе'
-        groupsUl.insertAdjacentElement('beforeend', p)
+    } else {
+        p.textContent = `Количество: ${user.groups.length}`
     }
+    groupsUl.insertAdjacentElement('beforeend', p)
     user.groups.forEach(groupId => {
         drawGroup(groupId)
     });

@@ -20,9 +20,20 @@ router.get('/user', async (req, res) => {
     res.render('user/userPage.hbs')
 })
 
+//Страница группы
+router.get('/group', async (req, res) => {
+    res.render('group/groupPage.hbs')
+})
+
+
 //Страница настроек пользователя
 router.get('/user/settings', async (req, res) => {
     res.render('user/userSettings.hbs')
+})
+
+//Страница создания группы
+router.get('/group/create', async (req, res) => {
+    res.render('group/createGroup.hbs')
 })
 
 //Выход из аккаунта

@@ -45,7 +45,7 @@ router.post('/group/:id', async (req, res) => {
         if (!group.members.includes(req.user._id)) {
             errorHandler(new Error('Отказано в доступе'), res, 403)
         }
-        for(key in group){ 
+        for (key in group) {
             group[key] = req.body[key] ?? group[key]
         }
         await group.save()
@@ -55,34 +55,36 @@ router.post('/group/:id', async (req, res) => {
     }
 })
 
-//подписка на группу
+//подписка или отписка от группы
 router.post('/group/subscribe/:id', async (req, res) => {
     if (!req.params.id) {
         errorHandler(new Error('Неверный id группы'), res)
     }
     try {
-        const group = await Group.findOneAndUpdate(
-            { _id: req.params.id },
-            { $push: { 'subscribers': req.user } },
-            { new: true }
-        )
-        res.status(200).json(group)
-    } catch (err) {
-        errorHandler(err, res)
-    }
-})
-
-//отписка от группы
-router.post('/group/unsubscribe/:id', async (req, res) => {
-    if (!req.params.id) {
-        errorHandler(new Error('Неверный id группы'), res)
-    }
-    try {
-        const group = await Group.findOneAndUpdate(
-            { _id: req.params.id },
-            { $pull: { 'subscribers': req.user } },
-            { new: true }
-        )
+        let group = await Group.findOne({ _id: req.params.id })
+        if (group.subscribers.includes(req.user._id)) {
+            group = await Group.findOneAndUpdate(
+                { _id: req.params.id },
+                { $pull: { 'subscribers': req.user._id } },
+                { new: true }
+            )
+            await User.updateOne(
+                { _id: req.user },
+                { $pull: { 'groups': req.params.id } },
+                { new: true }
+            )
+        } else {
+            group = await Group.findOneAndUpdate(
+                { _id: req.params.id },
+                { $push: { 'subscribers': req.user } },
+                { new: true }
+            )
+            await User.updateOne(
+                { _id: req.user },
+                { $push: { 'groups': req.params.id } },
+                { new: true }
+            )
+        }
         res.status(200).json(group)
     } catch (err) {
         errorHandler(err, res)

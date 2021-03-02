@@ -1,12 +1,9 @@
-const logout = document.querySelector('#Button-Logout')
-
-logout.onclick = async () => {
-    const responce = await fetch('/api/logout', {
+export const logout = async () => {
+    const response = await fetch('/api/logout', {
         method: 'POST',
         headers: {
-            'Authorization' : `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.token}`
         }
     })
-    localStorage.setItem('token', '')
-    location.href = '/login'
+    return response
 }
